@@ -62,7 +62,7 @@ fi
 mkdir -p /app &>>$LOG_FILE
 VALIDATE $? "directory /app is"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  &&>>$LOG_FILE
+curl -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
 VALIDATE $? "Curl Command is"
 
 cd /app &>>$LOG_FILE
@@ -70,23 +70,23 @@ VALIDATE $? "Move to Dir /app is"
 
 rm -rf /app/* 
 
-unzip /tmp/catalogue.zip &>>$LOG_FILE
+unzip /tmp/$appname.zip &>>$LOG_FILE
 VALIDATE $? "unzip is"
 
 npm install &>>$LOG_FILE
 VALIDATE $? "npm installation is"
 
-cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/ &>>$LOG_FILE
-VALIDATE $? "Copying catalogue service is"
+cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+VALIDATE $? "Copying $appname service is"
 
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "system daemon-reload"
 
-systemctl enable catalogue &>>$LOG_FILE
-VALIDATE $? "enabling catalogue service is"
+systemctl enable $appname &>>$LOG_FILE
+VALIDATE $? "enabling $appname service is"
 
-systemctl start catalogue &>>$LOG_FILE
-VALIDATE $? "Starting catalogue service is"
+systemctl start $appname &>>$LOG_FILE
+VALIDATE $? "Starting $appname service is"
 }
 
 END_TIME=$(date +%s)
