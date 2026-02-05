@@ -189,7 +189,7 @@ else
 fi
 }
 
-$dispatch_app() {
+dispatch_app() {
 
 curl -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
 VALIDATE $? "Curl Command is"
@@ -211,7 +211,7 @@ VALIDATE $? "get $appname is"
 go build &>>$LOG_FILE
 VALIDATE $? "build $appname is"
 
-cp $DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
 VALIDATE $? "Copying shipping service is"
 
 systemctl daemon-reload &>>$LOG_FILE
