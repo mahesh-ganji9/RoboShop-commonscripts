@@ -15,4 +15,5 @@ dnf install golang -y &>>$LOG_FILE
 VALIDATE $? "Installing golang is"
 
 dispatch_app
+systemd_check
 script_execution_time 

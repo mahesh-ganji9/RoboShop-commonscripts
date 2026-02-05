@@ -111,7 +111,7 @@ unzip /tmp/$appname.zip &>>$LOG_FILE
 VALIDATE $? "unzip is"
 
 npm install &>>$LOG_FILE
-VALIDATE $? "npm installation is"
+VALIDATE $? "npm installation is" 
 
 cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
 VALIDATE $? "Copying $appname service is"
@@ -206,13 +206,53 @@ VALIDATE $? "build $appname is"
 
 cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
 VALIDATE $? "Copying $appname service is"
+}
 
-systemctl daemon-reload &>>$LOG_FILE
-VALIDATE $? "system daemon reload is"
+app_check() {
+   mkdir -p /app &>>$LOG_FILE
+   VALIDATE $? "directory /app is"
 
-systemctl enable $appname 
-VALIDATE $? "enable $appname is"
+   curl -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
+   VALIDATE $? "Curl Command is"   
 
-systemctl start $appname
-VALIDATE $? "start $appname is"
+   cd /app &>>$LOG_FILE   
+   VALIDATE $? "Move to Dir /app is"
+
+   rm -rf /app/*
+
+   unzip /tmp/$appname.zip &>>$LOG_FILE
+   VALIDATE $? "unzip $appname is" 
+
+}
+
+java_setup() {
+
+     dnf install maven -y &>>$LOG_FILE
+     VALIDATE $? "Installing maven is"
+
+     mvn clean package &>>$LOG_FILE
+     VALIDATE $? "mvn creating .jar file"
+
+     mv target/$appname-1.0.jar $appname.jar  &>>$LOG_FILE
+    VALIDATE $? "renaming .jar file"
+
+     cp $DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+     VALIDATE $? "Copying $appname service is"
+}
+
+systemd_check() {
+     systemctl daemon-reload &>>$LOG_FILE
+     VALIDATE $? "system daemon-reload"
+
+     systemctl enable $appname &>>$LOG_FILE
+     VALIDATE $? "enabling $appname service is"
+
+     systemctl start $appname &>>$LOG_FILE
+     VALIDATE $? "Starting $appname service is"
+}
+
+restart_app() {
+
+    systemctl restart $appname &>>$LOG_FILE
+    VALIDATE $? "Restart $appname service is"
 }

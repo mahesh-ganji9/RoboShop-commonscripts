@@ -1,24 +1,17 @@
 #!/bin/bash
 
-appname=shipping
+echo -e "$N This Script used for Payment Service Creation"
 
-#This Script used to created Catalogue Service
 
 source ./common.sh
-
+appname=shipping
 
 root_user_check
 logfolder_check
-
-
-dnf install maven -y &>>$LOG_FILE
-VALIDATE $? "Installing maven is"
-
-mvn clean package &>>$LOG_FILE
-VALIDATE $? "mvn creating .jar file"
-
-mv target/shipping-1.0.jar shipping.jar  &>>$LOG_FILE
-VALIDATE $? "renaming .jar file"
+roboshop_user_check
+app_check
+java_setup
+systemd_check
 
 dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Installing mysql"
@@ -34,5 +27,6 @@ if [ $? -ne 0 ]; then
     echo "mysql db is already loaded"
 fi
 
-systemctl restart shipping &>>$LOG_FILE
-VALIDATE $? "Restart shipping service is"
+restart_app
+
+script_execution_time
