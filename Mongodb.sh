@@ -2,7 +2,7 @@
 
 #This Script used to created MongoDB instance
 
-source common.sh
+source /home/ec2-user/RoboShop-commonscripts/common.sh
 
 mkdir -p $LOG_FOLDER
 
