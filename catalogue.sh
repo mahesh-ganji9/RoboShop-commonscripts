@@ -2,7 +2,7 @@
 
 appname=catalogue
 
-#This Script used to created Catalogue Service
+#This Script used to create Catalogue Service
 
 source ./common.sh
 
@@ -18,7 +18,7 @@ VALIDATE $? "mongo.repo copy process is"
 dnf install mongodb-mongosh -y &>>$LOG_FILE
 VALIDATE $? "mongo installation is"
 
-INDEX=$(mongosh --host $MONGO_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+INDEX=$(mongosh --host $MONGO_HOST --quiet --eval 'db.getMongo().getDBNames().indexOf("catalogue")') 
 
 if [ $INDEX -le 0 ]; then
     mongosh --host $MONGO_HOST </app/db/master-data.js &>>$LOG_FILE

@@ -2,14 +2,15 @@
 
 appname=user
 
-#This Script used to created Catalogue Service
+#This Script used to creat User Service
 
 source ./common.sh
 
 
 root_user_check
 logfolder_check
-nodejssetup
 app_setup
+nodejssetup
+systemd_check
 
 script_execution_time
