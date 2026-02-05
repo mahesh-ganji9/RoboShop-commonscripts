@@ -18,10 +18,9 @@ systemctl start mysqld  &>>$LOG_FILE
 VALIDATE $? "start systemctl mysql service"
 
 mysql -u root -p"$ROOT_PASS" -e "SELECT 1;" &>/dev/null
-
 if [ $? -ne 0 ]; then
    echo -e "$R sql root password is not set..resetting now"
-   mysql_secure_installation --set-root-password RoboShop@1
+   mysql_secure_installation --set-root-password "$ROOT_PASS"
    else
    echo -e "$Y SQL root password is already set"
   fi
