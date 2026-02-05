@@ -15,3 +15,5 @@ root_user_check()
    echo -e "$Y please run the script with root access: $0"
    exit 1
 fi
+
+mkdir -p $LOG_FOLDER
