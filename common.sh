@@ -1,6 +1,7 @@
 #!/bin/bash
 
 Userid=$(id -u)
+START_TIME=$(date +%s)
 LOG_FOLDER=/var/log/ShellScript
 LOG_FILE=/var/log/ShellScript/$0.log
 SCRIPT_DIR=/home/ec2-user/RoboShop-commonscripts
@@ -25,6 +26,7 @@ logfolder_check() {
      fi
 }
 
+
 VALIDATE() {
     if [ $? -ne 0 ]; then
      
@@ -32,4 +34,11 @@ VALIDATE() {
     else
      echo -e "$G $2....Success"
      fi
+}
+
+END_TIME=$(date +$s)
+
+script_execution_time() {
+         Total_time=$(( $END_TIME - $START_TIME ))
+         echo Script Execution Time: $Total_time
 }
