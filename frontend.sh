@@ -10,3 +10,4 @@ source ./common.sh
 root_user_check
 logfolder_check
 frontendsetup
+script_execution_time
