@@ -24,3 +24,12 @@ logfolder_check() {
      mkdir -p $LOG_FOLDER
      fi
 }
+
+VALIDATE() {
+    if [ $? -ne 0 ]; then
+     
+     echo -e "$R $2....Failure"
+    else
+     echo -e "$G $2....Success"
+     fi
+}
