@@ -17,7 +17,7 @@ VALIDATE $? "enable mysql systemctl service"
 systemctl start mysqld  &>>$LOG_FILE
 VALIDATE $? "start systemctl mysql service"
 
-mysql -u root -p $ROOT_PASS -e "SELECT 1;" &>/dev/null
+mysql -u root -p"$ROOT_PASS" -e "SELECT 1;" &>/dev/null
 
 if [$? -ne 0]; then
    echo -e "$R sql root password is not set..resetting now"
