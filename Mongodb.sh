@@ -3,7 +3,7 @@
 echo -e "$G This Script used for MongoDB database Creation"
 
 source ./common.sh
-
+appname=mongod
 root_user_check
 logfolder_check
 
@@ -24,7 +24,5 @@ VALIDATE $? "$N Replacement of /etc/mongod.conf is"
 
 systemctl restart mongod &>>$LOG_FILE
 VALIDATE $? "$N Restarted mongodb service is" 
-
-
 
 script_execution_time

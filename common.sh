@@ -82,10 +82,6 @@ VALIDATE $? "Default $appname conf"
 
 cp $SCRIPT_DIR/$appname.conf /etc/$appname/
 VALIDATE $? "Copied $appname.conf file"
-
-
-systemctl restart $appname &>>$LOG_FILE
-VALIDATE $? "restart $appname is" 
 }
 
 app_setup(){
@@ -112,16 +108,6 @@ rm -rf /app/*
 
 unzip /tmp/$appname.zip &>>$LOG_FILE
 VALIDATE $? "unzip is"
-}
-
-
-nodejssetup(){
-
-
-
-cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
-VALIDATE $? "Copying $appname service is"
-
 }
 
 
