@@ -48,7 +48,7 @@ nodejssetup(){
 }
 
 frontendsetup(){
-   dnf module disable $appname -y &>>$LOG_FILE
+dnf module disable $appname -y &>>$LOG_FILE
 VALIDATE $? "Disabled $appname is" 
 
 dnf module enable $appname:1.24 -y &>>$LOG_FILE
@@ -126,9 +126,100 @@ systemctl start $appname &>>$LOG_FILE
 VALIDATE $? "starting $appname service is"
 }
 
-END_TIME=$(date +%s)
+
+python_setup(){
+    dnf install python3 gcc python3-devel -y &>>$LOG_FILE
+VALIDATE $? "Installing python3 is"
+
+id roboshop &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+   echo -e "$Y user roboshop already exists $N"
+   
+else
+   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+   VALIDATE $? "user create roboshop is"
+fi
+
+
+mkdir -p /app &>>$LOG_FILE
+VALIDATE $? "directory /app is"
+
+curl -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
+VALIDATE $? "Curl Command is"
+
+cd /app &>>$LOG_FILE
+VALIDATE $? "Move to Dir /app is"
+
+rm -rf /app/*
+
+unzip /tmp/$appname.zip &>>$LOG_FILE
+VALIDATE $? "unzip $appname is"
+
+pip3 install -r requirements.txt &>>$LOG_FILE
+VALIDATE $? "install dependencies and libraries"
+
+cp $DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+VALIDATE $? "Copying $appname service is"
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "system daemon-reload"
+
+systemctl enable $appname &>>$LOG_FILE
+VALIDATE $? "enabling $appname service is"
+
+systemctl start $appname &>>$LOG_FILE
+VALIDATE $? "Starting $appname service is"
+}
+
+
 script_execution_time() {
          END_TIME=$(date +%s)
          Total_time=$(($END_TIME-$START_TIME))
          echo -e "$N Script Execution Time: $G  $Total_time"
+}
+
+roboshop_user_check() {
+id roboshop &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+   echo -e "$Y user roboshop already exists $N"
+   
+else
+   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+   VALIDATE $? "user create roboshop is"
+fi
+}
+
+$dispatch_app() {
+
+curl -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
+VALIDATE $? "Curl Command is"
+
+cd /app &>>$LOG_FILE
+VALIDATE $? "Move to Dir /app is"
+
+rm -rf /app/*
+
+unzip /tmp/$appname.zip &>>$LOG_FILE
+VALIDATE $? "unzip $appname is"
+
+go mod init $appname &>>$LOG_FILE
+VALIDATE $? "init $appname is"
+
+go get &>>$LOG_FILE
+VALIDATE $? "get $appname is"
+
+go build &>>$LOG_FILE
+VALIDATE $? "build $appname is"
+
+cp $DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+VALIDATE $? "Copying shipping service is"
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "system daemon reload is"
+
+systemctl enable $appname 
+VALIDATE $? "enable $appname is"
+
+systemctl start $appname
+VALIDATE $? "start $appname is"
 }
