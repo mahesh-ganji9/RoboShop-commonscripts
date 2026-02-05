@@ -212,7 +212,7 @@ go build &>>$LOG_FILE
 VALIDATE $? "build $appname is"
 
 cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
-VALIDATE $? "Copying shipping service is"
+VALIDATE $? "Copying $appname service is"
 
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "system daemon reload is"
