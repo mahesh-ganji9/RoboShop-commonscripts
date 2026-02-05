@@ -36,9 +36,9 @@ VALIDATE() {
      fi
 }
 
-END_TIME=$(date +$s)
+END_TIME=$(date +%s)
 
 script_execution_time() {
-         Total_time=$(( $END_TIME - $START_TIME ))
+         Total_time=$(($END_TIME-$START_TIME))
          echo -e "$G Script Execution Time: $Total_time"
 }
