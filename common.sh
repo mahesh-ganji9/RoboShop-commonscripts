@@ -9,7 +9,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 B="\e[34m"
-
+N="\e[0m"
 
 root_user_check() {
       if [ $Userid -ne 0 ]; then
@@ -22,9 +22,9 @@ root_user_check() {
 
 logfolder_check() {
    if [ -d "$LOG_FOLDER" ]; then
-      echo -e "$N $LOG_FOLDER already exists"
+      echo -e "$Y $LOG_FOLDER already exists"
    else
-     echo -e "$Y $LOG_FOLDER getting created"
+     echo -e "$G $LOG_FOLDER getting created"
      mkdir -p $LOG_FOLDER
      fi
 }
@@ -33,15 +33,15 @@ logfolder_check() {
 VALIDATE() {
     if [ $? -ne 0 ]; then
      
-     echo -e "$R $2....Failure"
+     echo -e "$2.... $R Failure"
     else
-     echo -e "$2....$G Success $N"
+     echo -e "$2....$G Success"
      fi
 }
 
+END_TIME=$(date +%s)
 script_execution_time() {
          
          Total_time=$(($END_TIME-$START_TIME))
-         END_TIME=$(date +%s)
-         echo -e "$N Script Execution Time: $G $Total_time"
+         echo -e "$N Script Execution Time: $G  $Total_time"
 }

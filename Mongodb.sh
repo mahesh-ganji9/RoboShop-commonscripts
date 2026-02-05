@@ -8,22 +8,22 @@ root_user_check
 logfolder_check
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
-VALIDATE $? "mongo.repo copy process is"
+VALIDATE $? "$N mongo.repo copy process is"
 
 dnf install mongodb-org -y &>>$LOG_FILE
-VALIDATE $? "mongodb Installation is"
+VALIDATE $? "$N mongodb Installation is"
 
 systemctl enable mongod &>>$LOG_FILE
-VALIDATE $? "enabling mongodb service is"
+VALIDATE $? "$N enabling mongodb service is"
 
 systemctl start mongod &>>$LOG_FILE
-VALIDATE $? "Starting mongodb service is"
+VALIDATE $? "$N Starting mongodb service is"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>>$LOG_FILE
-VALIDATE $? "Replacement of /etc/mongod.conf is"
+VALIDATE $? "$N Replacement of /etc/mongod.conf is"
 
 systemctl restart mongod &>>$LOG_FILE
-VALIDATE $? "Restarted mongodb service is" 
+VALIDATE $? "$N Restarted mongodb service is" 
 
 
 
