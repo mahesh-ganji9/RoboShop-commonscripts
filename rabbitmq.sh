@@ -18,12 +18,12 @@ VALIDATE $? "enable rabbitmq systemctl service"
 systemctl start rabbitmq-server &>>$LOG_FILE
 VALIDATE $? "start systemctl rabbitmq service"
 
-id roboshop &>>$LOG_FILE
+rabbitmqctl list_users | grep -w roboshop &>>$LOG_FILE
 if [ $? -ne 0 ];then
-    echo "adding user roboshop"
+    echo "$Y Adding user roboshop in Progress....$N"
     rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
     rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
   else
-    echo "user roboshop already exists"
+    echo "$G user roboshop already exists $N"
 fi
     
