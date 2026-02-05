@@ -2,7 +2,7 @@
 
 #This Script used to created MongoDB instance
 
-source /home/ec2-user/RoboShop-commonscripts/common.sh
+source $SCRIPT_DIR/common.sh
 
 root_user_check
 logfolder_check
@@ -25,6 +25,6 @@ VALIDATE $? "Replacement of /etc/mongod.conf is"
 systemctl restart mongod &>>$LOG_FILE
 VALIDATE $? "Restarted mongodb service is" 
 
-END_TIME=$(date +%s)
+
 
 script_execution_time

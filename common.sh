@@ -20,7 +20,7 @@ root_user_check() {
 
 logfolder_check() {
    if [ -d "$LOG_FOLDER" ]; then
-      echo -e "$Y $LOG_FOLDER already exists"
+      echo -e "$N $LOG_FOLDER already exists"
    else
      echo -e "$Y $LOG_FOLDER getting created"
      mkdir -p $LOG_FOLDER
@@ -37,9 +37,9 @@ VALIDATE() {
      fi
 }
 
-
+END_TIME=$(date +%s)
 
 script_execution_time() {
          Total_time=$(($END_TIME-$START_TIME))
-         echo -e "$G Script Execution Time: $Total_time"
+         echo -e "$N Script Execution Time: $G $Total_time"
 }
