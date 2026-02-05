@@ -2,7 +2,7 @@
 
 #This Script used to created MongoDB instance
 
-source "C:\Repos\RoboShop-commonscripts\common.sh"
+source $SCRIPT_DIR
 
 mkdir -p $LOG_FOLDER
 
