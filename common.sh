@@ -22,5 +22,5 @@ logfolder_check() {
    else
      echo -e "$Y $LOG_FOLDER getting created"
      mkdir -p $LOG_FOLDER
-
-   }
+     fi
+}
