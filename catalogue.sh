@@ -2,7 +2,7 @@
 
 #This Script used to created Catalogue Service
 
-source ${SCRIPT_DIR}/common.sh
+source ./common.sh
 
 
 root_user_check
