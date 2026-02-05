@@ -10,6 +10,7 @@ G="\e[32m"
 Y="\e[33m"
 B="\e[34m"
 
+echo $START_TIME
 root_user_check() {
       if [ $Userid -ne 0 ]; then
       echo -e "$Y please run the script with root access: $0"
@@ -32,12 +33,13 @@ VALIDATE() {
      
      echo -e "$R $2....Failure"
     else
-     echo -e "$G $2....Success"
+     echo -e "$2....$G Success $N"
      fi
 }
 
 END_TIME=$(date +%s)
 
+echo $END_TIME
 script_execution_time() {
          Total_time=$(($END_TIME-$START_TIME))
          echo -e "$G Script Execution Time: $Total_time"
