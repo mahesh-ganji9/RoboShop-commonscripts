@@ -27,3 +27,4 @@ if [ $? -ne 0 ];then
     echo -e "$Y user roboshop already exists $N"
 fi
     
+script_execution_time

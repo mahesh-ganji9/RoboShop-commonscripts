@@ -24,3 +24,5 @@ VALIDATE $? "enable systemctl redis service"
 
 systemctl start redis  &>>$LOG_FILE
 VALIDATE $? "start systemctl redis service"
+
+script_execution_time
