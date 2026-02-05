@@ -45,6 +45,9 @@ nodejssetup(){
    VALIDATE $? "Enable Module Nodejs 20 version is"
 
    dnf install nodejs -y &>>$LOG_FILE
+
+   npm install &>>$LOG_FILE
+   VALIDATE $? "npm installation is" 
 }
 
 frontendsetup(){
@@ -109,21 +112,16 @@ rm -rf /app/*
 
 unzip /tmp/$appname.zip &>>$LOG_FILE
 VALIDATE $? "unzip is"
+}
 
-npm install &>>$LOG_FILE
-VALIDATE $? "npm installation is" 
+
+nodejssetup(){
+
+
 
 cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
 VALIDATE $? "Copying $appname service is"
 
-systemctl daemon-reload &>>$LOG_FILE
-VALIDATE $? "system daemon-reload"
-
-systemctl enable $appname &>>$LOG_FILE
-VALIDATE $? "enabling $appname service is"
-
-systemctl start $appname &>>$LOG_FILE
-VALIDATE $? "starting $appname service is"
 }
 
 

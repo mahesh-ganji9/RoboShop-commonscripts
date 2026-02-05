@@ -9,8 +9,9 @@ source ./common.sh
 
 root_user_check
 logfolder_check
-nodejssetup
 app_setup
+nodejssetup
+systemd_check
 
 cp /home/ec2-user/RoboShop-commonscripts/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
 VALIDATE $? "mongo.repo copy process is"
@@ -27,4 +28,4 @@ if [ $INDEX -le 0 ]; then
     echo -e "$Y Mongodb products already loaded"
   fi
 
-script_execution_time
+restart_app
