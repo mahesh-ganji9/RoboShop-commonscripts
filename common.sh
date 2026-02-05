@@ -40,5 +40,5 @@ END_TIME=$(date +$s)
 
 script_execution_time() {
          Total_time=$(( $END_TIME - $START_TIME ))
-         echo Script Execution Time: $Total_time
+         echo -e "$G Script Execution Time: $Total_time"
 }
