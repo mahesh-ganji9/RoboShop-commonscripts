@@ -25,4 +25,4 @@ VALIDATE $? "Replacement of /etc/mongod.conf is"
 systemctl restart mongod &>>$LOG_FILE
 VALIDATE $? "Restarted mongodb service is" 
 
-script_execution_time()
+script_execution_time

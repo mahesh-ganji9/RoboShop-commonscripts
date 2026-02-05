@@ -1,7 +1,7 @@
 #!/bin/bash
 
-Userid=$(id -u)
 START_TIME=$(date +%s)
+Userid=$(id -u)
 LOG_FOLDER=/var/log/ShellScript
 LOG_FILE=/var/log/ShellScript/$0.log
 SCRIPT_DIR=/home/ec2-user/RoboShop-commonscripts
