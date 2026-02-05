@@ -6,7 +6,6 @@ appname=catalogue
 
 source ./common.sh
 
-
 root_user_check
 logfolder_check
 app_setup
@@ -29,3 +28,5 @@ if [ $INDEX -le 0 ]; then
   fi
 
 restart_app
+
+script_execution_time
