@@ -1,10 +1,8 @@
 #!/bin/bash
 
-#This Script used to created Catalogue Service
+echo -e "$N This Script used for  $G Rabbitmq $N database Creation"
 
 source ./common.sh
-
-
 root_user_check
 logfolder_check
 
@@ -20,7 +18,7 @@ VALIDATE $? "enable rabbitmq systemctl service"
 systemctl start rabbitmq-server &>>$LOG_FILE
 VALIDATE $? "start systemctl rabbitmq service"
 
-id roboshop &>>$LOG_FILE
+id roboshop
 if [ $? -ne 0 ]; then
     echo "adding user roboshop"
     rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
