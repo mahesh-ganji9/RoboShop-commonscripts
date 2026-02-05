@@ -77,7 +77,7 @@ VALIDATE $? "unzip frontend zip is"
 rm -rf /etc/$appname/$appname.conf
 VALIDATE $? "Default $appname conf"
 
-cp $DIR/$appname.conf /etc/$appname/
+cp $SCRIPT_DIR/$appname.conf /etc/$appname/
 VALIDATE $? "Copied $appname.conf file"
 
 
