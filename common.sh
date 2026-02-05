@@ -23,7 +23,7 @@ logfolder_check() {
    if [ -d "$LOG_FOLDER" ]; then
       echo -e "$Y $LOG_FOLDER already exists"
    else
-     echo -e "$G $LOG_FOLDER getting created"
+     echo -e "$N $LOG_FOLDER creation is.....$G progress"
      mkdir -p $LOG_FOLDER
      fi
      }

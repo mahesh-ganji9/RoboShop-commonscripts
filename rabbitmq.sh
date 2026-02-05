@@ -9,7 +9,7 @@ root_user_check
 logfolder_check
 
 cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
-VALIDATE $? "rabbitmq copy prcoess"
+VALIDATE $? "rabbitmq copy process"
 
 dnf install rabbitmq-server -y &>>$LOG_FILE
 VALIDATE $? "Installing rabbitmq server"
