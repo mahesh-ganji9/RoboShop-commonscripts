@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#This Script used to created MongoDB instance
+echo -e "$G This Script used for MongoDB database Creation"
 
-source /home/ec2-user/RoboShop-commonscripts/common.sh
+source ./common.sh
 
 root_user_check
 logfolder_check
