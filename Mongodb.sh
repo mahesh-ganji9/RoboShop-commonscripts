@@ -2,7 +2,7 @@
 
 #This Script used to created MongoDB instance
 
-source ${SCRIPT_DIR}/common.sh
+source /home/ec2-user/RoboShop-commonscripts/common.sh
 
 root_user_check
 logfolder_check
