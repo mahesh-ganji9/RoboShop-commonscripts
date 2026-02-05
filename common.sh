@@ -31,21 +31,62 @@ logfolder_check() {
 VALIDATE() {
     if [ $? -ne 0 ]; then
      
-     echo -e "$2.... $R Failure"
+     echo -e "$N $2.... $R Failure"
     else
-     echo -e "$2....$G Success"
+     echo -e "$N $2....$G Success"
      fi
 }
 
-id roboshop &>>LOG_FILE
-User_Validate() {
-  if [ $? -eq 0 ]; then
-   echo "$Y user roboshop already exists"
+nodejssetup(){
+    dnf module disable nodejs -y &>>$LOG_FILE
+    VALIDATE $? "Disable Module Nodejs is"
+
+   dnf module enable nodejs:20 -y &>>$LOG_FILE
+   VALIDATE $? "Enable Module Nodejs 20 version is"
+
+   dnf install nodejs -y &>>$LOG_FILE
+   VALIDATE $? "Nodejs Installation Verison is"
+}
+
+app_setup(){
+    id roboshop &>>LOG_FILE
+if [ $? -eq 0 ]; then
+   echo "user roboshop already exists"
+   
 else
    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
    VALIDATE $? "user create roboshop is"
 fi
 
+
+mkdir -p /app &>>$LOG_FILE
+VALIDATE $? "directory /app is"
+
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  &&>>$LOG_FILE
+VALIDATE $? "Curl Command is"
+
+cd /app &>>$LOG_FILE
+VALIDATE $? "Move to Dir /app is"
+
+rm -rf /app/* 
+
+unzip /tmp/catalogue.zip &>>$LOG_FILE
+VALIDATE $? "unzip is"
+
+npm install &>>$LOG_FILE
+VALIDATE $? "npm installation is"
+
+cp $DIR/Catalogue.service /etc/systemd/system/ &>>$LOG_FILE
+VALIDATE $? "Copying Catalogue service is"
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "system daemon-reload"
+
+systemctl enable Catalogue &>>$LOG_FILE
+VALIDATE $? "enabling Catalogue service is"
+
+systemctl start Catalogue &>>$LOG_FILE
+VALIDATE $? "Starting Catalogue service is"
 }
 
 END_TIME=$(date +%s)
