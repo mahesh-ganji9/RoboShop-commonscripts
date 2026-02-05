@@ -8,6 +8,8 @@ source /home/ec2-user/RoboShop-commonscripts/common.sh
 
 root_user_check
 
+mkdir -p $LOG_FOLDER
+
 # VALIDATE() {
 #     if [ $? -ne 0 ]; then
      

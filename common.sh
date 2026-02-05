@@ -12,8 +12,7 @@ B="\e[34m"
 root_user_check() {
       if [ $Userid -ne 0 ]; then
       echo -e "$Y please run the script with root access: $0"
-   exit 1
-fi
+      exit 1
+      fi
 }
 
-mkdir -p $LOG_FOLDER
