@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #This Script used to created MongoDB instance
-$app_name=mongo
+
 source /home/ec2-user/RoboShop-commonscripts/common.sh
 
 root_user_check
