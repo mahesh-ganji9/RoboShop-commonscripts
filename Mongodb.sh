@@ -2,7 +2,7 @@
 
 #This Script used to created MongoDB instance
 
-source $SCRIPT_DIR/common.sh
+source ${SCRIPT_DIR}/common.sh
 
 root_user_check
 logfolder_check
