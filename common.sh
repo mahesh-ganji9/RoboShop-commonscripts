@@ -191,6 +191,9 @@ fi
 
 dispatch_app() {
 
+mkdir -p /app &>>$LOG_FILE
+VALIDATE $? "directory /app is"
+
 curl -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
 VALIDATE $? "Curl Command is"
 
