@@ -18,8 +18,8 @@ VALIDATE $? "enable rabbitmq systemctl service"
 systemctl start rabbitmq-server &>>$LOG_FILE
 VALIDATE $? "start systemctl rabbitmq service"
 
-id roboshop
-if [ $? -ne 0 ]; then
+id roboshop &>>$LOG_FILE
+if [ $? -ne 0 ];then
     echo "adding user roboshop"
     rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
     rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
