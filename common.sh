@@ -76,17 +76,17 @@ VALIDATE $? "unzip is"
 npm install &>>$LOG_FILE
 VALIDATE $? "npm installation is"
 
-cp $SCRIPT_DIR/Catalogue.service /etc/systemd/system/ &>>$LOG_FILE
-VALIDATE $? "Copying Catalogue service is"
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/ &>>$LOG_FILE
+VALIDATE $? "Copying catalogue service is"
 
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "system daemon-reload"
 
-systemctl enable Catalogue &>>$LOG_FILE
-VALIDATE $? "enabling Catalogue service is"
+systemctl enable catalogue &>>$LOG_FILE
+VALIDATE $? "enabling catalogue service is"
 
-systemctl start Catalogue &>>$LOG_FILE
-VALIDATE $? "Starting Catalogue service is"
+systemctl start catalogue &>>$LOG_FILE
+VALIDATE $? "Starting catalogue service is"
 }
 
 END_TIME=$(date +%s)
