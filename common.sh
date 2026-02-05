@@ -5,6 +5,7 @@ Userid=$(id -u)
 LOG_FOLDER=/var/log/ShellScript
 LOG_FILE=/var/log/ShellScript/$0.log
 SCRIPT_DIR=/home/ec2-user/RoboShop-commonscripts
+MONGO_HOST=mongodb.daws88s.shop
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
@@ -18,8 +19,6 @@ root_user_check() {
       fi
 }
 
-
-
 logfolder_check() {
    if [ -d "$LOG_FOLDER" ]; then
       echo -e "$Y $LOG_FOLDER already exists"
@@ -27,8 +26,7 @@ logfolder_check() {
      echo -e "$G $LOG_FOLDER getting created"
      mkdir -p $LOG_FOLDER
      fi
-}
-
+     }
 
 VALIDATE() {
     if [ $? -ne 0 ]; then
@@ -37,6 +35,17 @@ VALIDATE() {
     else
      echo -e "$2....$G Success"
      fi
+}
+
+id roboshop &>>LOG_FILE
+User_Validate() {
+  if [ $? -eq 0 ]; then
+   echo "$Y user roboshop already exists"
+else
+   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+   VALIDATE $? "user create roboshop is"
+fi
+
 }
 
 END_TIME=$(date +%s)
