@@ -17,7 +17,7 @@ systemctl enable mongod &>>$LOG_FILE
 VALIDATE $? "$N enabling mongodb service is"
 
 systemctl start mongod &>>$LOG_FILE
-VALIDATE $? "$N Starting mongodb service is"
+VALIDATE $? "$N starting mongodb service is"
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>>$LOG_FILE
 VALIDATE $? "$N Replacement of /etc/mongod.conf is"
