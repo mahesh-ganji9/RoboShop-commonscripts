@@ -7,6 +7,7 @@ appname=payment
 
 root_user_check
 logfolder_check
-roboshop_user_check
+app_check
 python_setup
+systemd_check
 script_execution_time

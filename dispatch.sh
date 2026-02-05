@@ -9,8 +9,7 @@ appname=dispatch
 
 root_user_check
 logfolder_check
-roboshop_user_check
-
+app_check
 dnf install golang -y &>>$LOG_FILE
 VALIDATE $? "Installing golang is"
 

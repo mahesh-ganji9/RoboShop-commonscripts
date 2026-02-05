@@ -131,34 +131,11 @@ python_setup(){
     dnf install python3 gcc python3-devel -y &>>$LOG_FILE
     VALIDATE $? "Installing python3 is"
 
-mkdir -p /app &>>$LOG_FILE
-VALIDATE $? "directory /app is"
+   pip3 install -r requirements.txt &>>$LOG_FILE
+   VALIDATE $? "install dependencies and libraries"
 
-curl -sS -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
-VALIDATE $? "Curl Command is"
-
-cd /app &>>$LOG_FILE
-VALIDATE $? "Move to Dir /app is"
-
-rm -rf /app/*
-
-unzip /tmp/$appname.zip &>>$LOG_FILE
-VALIDATE $? "unzip $appname is"
-
-pip3 install -r requirements.txt &>>$LOG_FILE
-VALIDATE $? "install dependencies and libraries"
-
-cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
-VALIDATE $? "Copying $appname service is"
-
-systemctl daemon-reload &>>$LOG_FILE
-VALIDATE $? "system daemon-reload"
-
-systemctl enable $appname &>>$LOG_FILE
-VALIDATE $? "enabling $appname service is"
-
-systemctl start $appname &>>$LOG_FILE
-VALIDATE $? "Starting $appname service is"
+   cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+   VALIDATE $? "Copying $appname service is"
 }
 
 
@@ -168,33 +145,7 @@ script_execution_time() {
          echo -e "$N Script Execution Time: $G  $Total_time"
 }
 
-roboshop_user_check() {
-id roboshop &>>$LOG_FILE
-if [ $? -eq 0 ]; then
-   echo -e "$Y user roboshop already exists $N"
-   
-else
-   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
-   VALIDATE $? "user create roboshop is"
-fi
-}
-
 dispatch_app() {
-
-mkdir -p /app &>>$LOG_FILE
-VALIDATE $? "directory /app is"
-
-curl -sS -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &>>$LOG_FILE
-VALIDATE $? "Curl Command is"
-
-cd /app &>>$LOG_FILE
-VALIDATE $? "Move to Dir /app is"
-
-rm -rf /app/*
-
-unzip /tmp/$appname.zip &>>$LOG_FILE
-VALIDATE $? "unzip $appname is"
-
 go mod init $appname &>>$LOG_FILE
 VALIDATE $? "init $appname is"
 
@@ -209,6 +160,14 @@ VALIDATE $? "Copying $appname service is"
 }
 
 app_check() {
+   id roboshop &>>$LOG_FILE
+if [ $? -eq 0 ]; then
+   echo -e "$Y user roboshop already exists $N"
+   
+else
+   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
+   VALIDATE $? "user create roboshop is"
+fi
    mkdir -p /app &>>$LOG_FILE
    VALIDATE $? "directory /app is"
 

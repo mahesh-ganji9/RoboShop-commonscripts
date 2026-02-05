@@ -8,7 +8,6 @@ appname=shipping
 
 root_user_check
 logfolder_check
-roboshop_user_check
 app_check
 java_setup
 systemd_check
