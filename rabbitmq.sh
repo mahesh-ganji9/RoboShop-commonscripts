@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "$N This Script used for  $G Rabbitmq $N database Creation"
+echo -e "$G This Script used for Rabbitmq database Creation"
 
 source ./common.sh
 root_user_check
@@ -20,10 +20,10 @@ VALIDATE $? "start systemctl rabbitmq service"
 
 rabbitmqctl list_users | grep -w roboshop &>>$LOG_FILE
 if [ $? -ne 0 ];then
-    echo "$Y Adding user roboshop in Progress....$N"
+    echo -e "$Y Adding user roboshop in Progress....$N"
     rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
     rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
   else
-    echo "$G user roboshop already exists $N"
+    echo -e "$G user roboshop already exists $N"
 fi
     
