@@ -4,7 +4,7 @@ START_TIME=$(date +%s)
 Userid=$(id -u)
 LOG_FOLDER=/var/log/ShellScript
 LOG_FILE=/var/log/ShellScript/$0.log
-SCRIPT_DIR=/home/ec2-user/RoboShop-commonscripts
+SCRIPT_DIR=$PWD
 MONGO_HOST=mongodb.daws88s.shop
 R="\e[31m"
 G="\e[32m"
@@ -76,7 +76,7 @@ VALIDATE $? "unzip is"
 npm install &>>$LOG_FILE
 VALIDATE $? "npm installation is"
 
-cp $DIR/Catalogue.service /etc/systemd/system/ &>>$LOG_FILE
+cp $SCRIPT_DIR/Catalogue.service /etc/systemd/system/ &>>$LOG_FILE
 VALIDATE $? "Copying Catalogue service is"
 
 systemctl daemon-reload &>>$LOG_FILE
