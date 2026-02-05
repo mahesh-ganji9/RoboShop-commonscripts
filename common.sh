@@ -148,7 +148,7 @@ VALIDATE $? "unzip $appname is"
 pip3 install -r requirements.txt &>>$LOG_FILE
 VALIDATE $? "install dependencies and libraries"
 
-cp $DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
 VALIDATE $? "Copying $appname service is"
 
 systemctl daemon-reload &>>$LOG_FILE
