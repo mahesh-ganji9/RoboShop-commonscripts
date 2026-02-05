@@ -27,3 +27,4 @@ if [ $INDEX -le 0 ]; then
     echo -e "$Y Mongodb products already loaded"
   fi
 
+script_execution_time

@@ -45,7 +45,44 @@ nodejssetup(){
    VALIDATE $? "Enable Module Nodejs 20 version is"
 
    dnf install nodejs -y &>>$LOG_FILE
-   VALIDATE $? "Nodejs Installation Verison is"
+}
+
+frontendsetup(){
+   dnf module disable $appname -y &>>$LOG_FILE
+VALIDATE $? "Disabled $appname is" 
+
+dnf module enable $appname:1.24 -y &>>$LOG_FILE
+VALIDATE $? "Module Enabilng $appname is"
+
+dnf install $appname -y &>>$LOG_FILE
+VALIDATE $? "Installing $appname is"
+
+systemctl enable $appname &>>$LOG_FILE
+VALIDATE $? "enabling service $appname is"
+
+systemctl start $appname &>>$LOG_FILE
+VALIDATE $? "starting $appname is"
+
+rm -rf /usr/share/$appname/html/* &>>$LOG_FILE
+VALIDATE $? "Removing default html file is"
+
+curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip  &>>$LOG_FILE
+VALIDATE $? "download frontend is"
+
+cd /usr/share/$appname/html &>>$LOG_FILE
+
+unzip /tmp/frontend.zip  &>>$LOG_FILE
+VALIDATE $? "unzip frontend zip is"
+
+rm -rf /etc/$appname/$appname.conf
+VALIDATE $? "Default $appname conf"
+
+cp $DIR/$appname.conf /etc/$appname/
+VALIDATE $? "Copied $appname.conf file"
+
+
+systemctl restart $appname &>>$LOG_FILE
+VALIDATE $? "restart $appname is" 
 }
 
 app_setup(){
@@ -86,7 +123,7 @@ systemctl enable $appname &>>$LOG_FILE
 VALIDATE $? "enabling $appname service is"
 
 systemctl start $appname &>>$LOG_FILE
-VALIDATE $? "Starting $appname service is"
+VALIDATE $? "starting $appname service is"
 }
 
 END_TIME=$(date +%s)
