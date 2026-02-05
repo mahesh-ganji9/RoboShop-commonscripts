@@ -16,3 +16,11 @@ root_user_check() {
       fi
 }
 
+logfolder_check() {
+   if [ -d "$LOG_FOLDER" ]; then
+      echo -e "$Y $LOG_FOLDER already exists"
+   else
+     echo -e "$Y $LOG_FOLDER getting created"
+     mkdir -p $LOG_FOLDER
+
+   }

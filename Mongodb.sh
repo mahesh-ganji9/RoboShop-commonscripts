@@ -8,7 +8,9 @@ source /home/ec2-user/RoboShop-commonscripts/common.sh
 
 root_user_check
 
-mkdir -p $LOG_FOLDER
+create_folder_check()
+
+logfolder_check()
 
 # VALIDATE() {
 #     if [ $? -ne 0 ]; then
