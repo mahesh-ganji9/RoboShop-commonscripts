@@ -2,7 +2,7 @@
 
 #This Script used to created MongoDB instance
 
-source $SCRIPT_DIR
+source common.sh
 
 mkdir -p $LOG_FOLDER
 
