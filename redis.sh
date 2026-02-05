@@ -1,9 +1,8 @@
 #!/bin/bash
 
-#This Script used to created Catalogue Service
+echo -e "$G This Script used for Redis database Creation"
 
 source ./common.sh
-
 
 root_user_check
 logfolder_check
