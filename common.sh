@@ -129,22 +129,12 @@ VALIDATE $? "starting $appname service is"
 
 python_setup(){
     dnf install python3 gcc python3-devel -y &>>$LOG_FILE
-VALIDATE $? "Installing python3 is"
-
-id roboshop &>>$LOG_FILE
-if [ $? -eq 0 ]; then
-   echo -e "$Y user roboshop already exists $N"
-   
-else
-   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
-   VALIDATE $? "user create roboshop is"
-fi
-
+    VALIDATE $? "Installing python3 is"
 
 mkdir -p /app &>>$LOG_FILE
 VALIDATE $? "directory /app is"
 
-curl -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
+curl -sS -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
 VALIDATE $? "Curl Command is"
 
 cd /app &>>$LOG_FILE
