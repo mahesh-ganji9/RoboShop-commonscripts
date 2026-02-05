@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This Script used to create sql
+echo -e "$G This Script used for mysql database Creation"
 
 source ./common.sh
 
@@ -17,6 +17,6 @@ systemctl start mysqld
 VALIDATE $? "start systemctl mysql service"
 
 mysql_secure_installation --set-root-pass RoboShop@1
-VALIDATE $? "Set mysql root pass"
+VALIDATE $? "Set mysql root password"
 
 script_execution_time
