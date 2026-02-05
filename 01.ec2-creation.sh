@@ -9,6 +9,11 @@ subnetid="subnet-06a0137ee419d9703"
 ZoneId="Z01154241BNSMMPVQO32W"
 HostedZone="daws88s.shop"
 
+if [ $@ -eq 0 ]; then
+   echo "Please provide the instance name to proceed with instance creation"
+   else 
+
+
 for Instance in $@
 do
 
@@ -55,3 +60,4 @@ aws route53 change-resource-record-sets --hosted-zone-id $ZoneId \
 echo "$Instance dns record is $Instance.$HostedZone"
 
 done
+fi

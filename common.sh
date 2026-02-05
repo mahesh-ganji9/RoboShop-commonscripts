@@ -10,7 +10,7 @@ G="\e[32m"
 Y="\e[33m"
 B="\e[34m"
 
-echo $START_TIME
+echo "$START_TIME"
 root_user_check() {
       if [ $Userid -ne 0 ]; then
       echo -e "$Y please run the script with root access: $0"
