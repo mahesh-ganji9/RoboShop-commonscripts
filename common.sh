@@ -48,6 +48,8 @@ nodejssetup(){
 
    npm install &>>$LOG_FILE
    VALIDATE $? "npm installation is" 
+
+   
 }
 
 frontendsetup(){
@@ -108,6 +110,9 @@ rm -rf /app/*
 
 unzip /tmp/$appname.zip &>>$LOG_FILE
 VALIDATE $? "unzip is"
+
+cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+VALIDATE $? "Copying $appname service is"
 }
 
 
