@@ -97,7 +97,6 @@ else
    VALIDATE $? "user create roboshop is"
 fi
 
-
 mkdir -p /app &>>$LOG_FILE
 VALIDATE $? "directory /app is"
 
@@ -154,8 +153,8 @@ java_setup() {
      mv target/$appname-1.0.jar $appname.jar  &>>$LOG_FILE
     VALIDATE $? "renaming .jar file"
 
-     cp $DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
-     VALIDATE $? "Copying $appname service is"
+   #   cp $SCR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
+   #   VALIDATE $? "Copying $appname service is"
 }
 
 systemd_check() {
