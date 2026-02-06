@@ -3,7 +3,6 @@
 echo -e "$G This Script used for MongoDB database Creation"
 
 source ./common.sh
-appname=mongod
 root_user_check
 logfolder_check
 

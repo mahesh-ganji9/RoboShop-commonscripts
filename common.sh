@@ -55,7 +55,7 @@ dnf module disable $appname -y &>>$LOG_FILE
 VALIDATE $? "Disabled $appname is" 
 
 dnf module enable $appname:1.24 -y &>>$LOG_FILE
-VALIDATE $? "Module Enabilng $appname is"
+VALIDATE $? "Module Enabling $appname is"
 
 dnf install $appname -y &>>$LOG_FILE
 VALIDATE $? "Installing $appname is"
@@ -123,12 +123,6 @@ python_setup(){
 }
 
 
-script_execution_time() {
-         END_TIME=$(date +%s)
-         Total_time=$(($END_TIME-$START_TIME))
-         echo -e "$N Script Execution Time: $G  $Total_time"
-}
-
 dispatch_app() {
 go mod init $appname &>>$LOG_FILE
 VALIDATE $? "init $appname is"
@@ -141,31 +135,6 @@ VALIDATE $? "build $appname is"
 
 cp $SCRIPT_DIR/$appname.service /etc/systemd/system/ &>>$LOG_FILE
 VALIDATE $? "Copying $appname service is"
-}
-
-app_check() {
-   id roboshop &>>$LOG_FILE
-if [ $? -eq 0 ]; then
-   echo -e "$Y user roboshop already exists $N"
-   
-else
-   useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
-   VALIDATE $? "user create roboshop is"
-fi
-   mkdir -p /app &>>$LOG_FILE
-   VALIDATE $? "directory /app is"
-
-   curl -sS -o /tmp/$appname.zip https://roboshop-artifacts.s3.amazonaws.com/$appname-v3.zip  &&>>$LOG_FILE
-   VALIDATE $? "Curl Command is"   
-
-   cd /app &>>$LOG_FILE   
-   VALIDATE $? "Move to Dir /app is"
-
-   rm -rf /app/*
-
-   unzip /tmp/$appname.zip &>>$LOG_FILE
-   VALIDATE $? "unzip $appname is" 
-
 }
 
 java_setup() {
@@ -192,6 +161,12 @@ systemd_check() {
 
      systemctl start $appname &>>$LOG_FILE
      VALIDATE $? "Starting $appname service is"
+}
+
+script_execution_time() {
+         END_TIME=$(date +%s)
+         Total_time=$(($END_TIME-$START_TIME))
+         echo -e "$N Script Execution Time: $G  $Total_time"
 }
 
 restart_app() {

@@ -4,7 +4,6 @@ echo -e "$G This Script used for mysql database Creation"
 
 source ./common.sh
 
-ROOT_PASS="RoboShop@1"
 root_user_check
 logfolder_check
 

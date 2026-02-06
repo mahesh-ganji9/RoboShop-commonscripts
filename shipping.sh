@@ -8,7 +8,7 @@ appname=shipping
 
 root_user_check
 logfolder_check
-app_check
+app_setup
 java_setup
 systemd_check
 
